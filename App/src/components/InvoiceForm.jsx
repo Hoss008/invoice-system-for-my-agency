@@ -1,5 +1,5 @@
 //Form
-import { useActionState, useState } from "react";
+import { useActionState } from "react";
 
 async function actionFunction(previousState, formData) {
   const clientName = formData.get("clientName");
@@ -7,7 +7,8 @@ async function actionFunction(previousState, formData) {
   const price = formData.get("price");
   const inv = formData.get("inv");
   const quo = formData.get("quo");
-  const date = new Date().toISOString().split("T")[0]; // Today's date
+  const now = new Date();
+  const date = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`; //cairo time not UTC
 
   if (!clientName || !price || !inv || !quo) {
     return {
@@ -29,11 +30,6 @@ async function actionFunction(previousState, formData) {
 
 function InvoiceForm() {
   const [state, formAction] = useActionState(actionFunction, null);
-  const [inputValue, setInputValue] = useState();
-
-  const handleChange = (e) => {
-    setInputValue(e.target.value);
-  };
 
   return (
     <>
@@ -48,13 +44,11 @@ function InvoiceForm() {
           type="number"
           placeholder="Price in $"
           name="price"
-          onChange={handleChange}
-          value={inputValue}
         />
 
         <input type="number" placeholder="Quotaion Ref" name="quo" />
 
-        <button type="submit">Submit </button>
+        <button type="submit">Gnerate Invoice </button>
       </form>
 
       {state?.message && <p>{state.message}</p>}
@@ -76,9 +70,10 @@ function InvoiceForm() {
               })()}
             </p>
           )}
-          <p>{inputValue * 52}</p>
+          <p>Total In EGP {(parseFloat(state.price) * 52).toLocaleString()}</p>
           <p>{`INV-00${state.inv}-EG-26`}</p>
           <p>{`QUOTATION REF: QT-00${state.quo}-EG-26`}</p>
+          <button>Download Invoice.</button>
         </>
       )}
     </>
