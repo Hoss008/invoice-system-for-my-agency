@@ -7,7 +7,7 @@ import {
   Font,
 } from "@react-pdf/renderer";
 
-
+Font.registerHyphenationCallback((word) => [word]);
 const EGP_RATE = 52;
 
 const styles = StyleSheet.create({
@@ -27,16 +27,18 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "flex-start",
     marginBottom: 36,
+    width: "100%",
   },
   brandName: {
     fontSize: 26,
     fontWeight: 700,
     letterSpacing: -0.5,
+    flex: 1,
   },
   invoiceLabel: {
     fontSize: 16,
     fontWeight: 700,
-    letterSpacing: 3,
+    flex: 1,
     textAlign: "right",
   },
 
@@ -343,12 +345,11 @@ function InvoiceDocument({ clientName, companyName, date, price, inv, quo }) {
           <View style={styles.paymentRight}>
             <Text style={styles.paymentNote}>
               [ FIRST MILESTONE PAYMENT ] — {companyName || clientName} |
-              Website Portfolio.{"\n"}
-              50% upfront payment based on the approved quotation [
-              {quotationRef}]
-              Payment preferably to be paid in full no later than 7 days after
-              receiving this invoice. For International Payments, please ensure
-              bank/transfer fees are covered from your side.
+              Website Portfolio. 50% upfront payment based on the approved
+              quotation [{quotationRef}] Payment preferably to be paid in full
+              no later than 7 days after receiving this invoice. For
+              International Payments, please ensure bank/transfer fees are
+              covered from your side.
             </Text>
             <Text style={styles.thankYou}>
               Thank you for your trust. We look forward to working with you
