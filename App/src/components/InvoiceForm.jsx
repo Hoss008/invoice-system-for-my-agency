@@ -32,7 +32,7 @@ function InvoiceForm() {
   const [inputValue, setInputValue] = useState();
 
   const handleChange = (e) => {
-    setInputValue(e.target.value) 
+    setInputValue(e.target.value);
   };
 
   return (
@@ -46,10 +46,10 @@ function InvoiceForm() {
 
         <input
           type="number"
-          placeholder="Price"
+          placeholder="Price in $"
           name="price"
           onChange={handleChange}
-          value={inputValue}  
+          value={inputValue}
         />
 
         <input type="number" placeholder="Quotaion Ref" name="quo" />
@@ -76,7 +76,7 @@ function InvoiceForm() {
               })()}
             </p>
           )}
-          <p>{inputValue*52}</p>
+          <p>{inputValue * 52}</p>
           <p>{`INV-00${state.inv}-EG-26`}</p>
           <p>{`QUOTATION REF: QT-00${state.quo}-EG-26`}</p>
         </>
