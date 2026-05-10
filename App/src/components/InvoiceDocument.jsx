@@ -1,6 +1,15 @@
-import { Document, Page, View, Text, StyleSheet, Font } from "@react-pdf/renderer";
+import {
+  Document,
+  Page,
+  View,
+  Text,
+  StyleSheet,
+  Font,
+} from "@react-pdf/renderer";
 
 // Register your font — replace with your actual font file path
+// Uncomment and add font files to public/fonts/ when ready
+/*
 Font.register({
   family: "Inter",
   fonts: [
@@ -9,12 +18,13 @@ Font.register({
     { src: "/fonts/Inter-Bold.ttf", fontWeight: 700 },
   ],
 });
+*/
 
 const EGP_RATE = 52;
 
 const styles = StyleSheet.create({
   page: {
-    fontFamily: "Inter",
+    fontFamily: "Helvetica",
     fontSize: 9,
     color: "#111111",
     backgroundColor: "#ffffff",
@@ -243,7 +253,6 @@ function InvoiceDocument({ clientName, companyName, date, price, inv, quo }) {
   return (
     <Document>
       <Page size="A4" style={styles.page}>
-
         {/* ── Section 1 — Header ── */}
         <View style={styles.header}>
           <Text style={styles.brandName}>NorqueStudios™</Text>
@@ -256,7 +265,9 @@ function InvoiceDocument({ clientName, companyName, date, price, inv, quo }) {
           <View style={styles.billingBlock}>
             <Text style={styles.label}>Billed From</Text>
             <Text style={styles.billingName}>NorqueStudios™</Text>
-            <Text style={styles.billingDetail}>[ hello@norquestudios.com ]</Text>
+            <Text style={styles.billingDetail}>
+              [ hello@norquestudios.com ]
+            </Text>
           </View>
 
           {/* Billed To */}
@@ -319,28 +330,41 @@ function InvoiceDocument({ clientName, companyName, date, price, inv, quo }) {
             <View>
               <Text style={styles.paymentMethodLabel}>Bank Transfer</Text>
               <Text style={styles.paymentDetail}>QATAR NATIONAL BANK</Text>
-              <Text style={styles.paymentDetail}>[ ACC NO. ]  1020861588135</Text>
-              <Text style={styles.paymentDetail}>[ IBAN ]  EG32 0037 0027 0818 1020 8615 8813 5</Text>
-              <Text style={styles.paymentDetail}>[ SWIFT CODE ]  QNBAEGCXXXX</Text>
+              <Text style={styles.paymentDetail}>
+                [ ACC NO. ] 1020861588135
+              </Text>
+              <Text style={styles.paymentDetail}>
+                [ IBAN ] EG32 0037 0027 0818 1020 8615 8813 5
+              </Text>
+              <Text style={styles.paymentDetail}>
+                [ SWIFT CODE ] QNBAEGCXXXX
+              </Text>
             </View>
             <View>
               <Text style={styles.paymentMethodLabel}>Other Methods</Text>
-              <Text style={styles.paymentDetail}>[ INSTAPAY ]  (+20) 110 0263391</Text>
-              <Text style={styles.paymentDetail}>[ PAYPAL ]  norquestuduios.paypal.me</Text>
+              <Text style={styles.paymentDetail}>
+                [ INSTAPAY ] (+20) 110 0263391
+              </Text>
+              <Text style={styles.paymentDetail}>
+                [ PAYPAL ] norquestuduios.paypal.me
+              </Text>
             </View>
           </View>
 
           {/* Right — payment note */}
           <View style={styles.paymentRight}>
             <Text style={styles.paymentNote}>
-              [ FIRST MILESTONE PAYMENT ] — {companyName || clientName} | Website Portfolio.{"\n"}
-              50% upfront payment based on the approved quotation [{quotationRef}].{"\n"}
-              Payment preferably to be paid in full no later than 7 days after receiving
-              this invoice. For International Payments, please ensure bank/transfer fees
-              are covered from your side.
+              [ FIRST MILESTONE PAYMENT ] — {companyName || clientName} |
+              Website Portfolio.{"\n"}
+              50% upfront payment based on the approved quotation [
+              {quotationRef}].{"\n"}
+              Payment preferably to be paid in full no later than 7 days after
+              receiving this invoice. For International Payments, please ensure
+              bank/transfer fees are covered from your side.
             </Text>
             <Text style={styles.thankYou}>
-              Thank you for your trust. We look forward to working with you again!
+              Thank you for your trust. We look forward to working with you
+              again!
             </Text>
           </View>
         </View>
@@ -350,7 +374,6 @@ function InvoiceDocument({ clientName, companyName, date, price, inv, quo }) {
           <Text style={styles.footerText}>NORQUE STUDIOS™</Text>
           <Text style={styles.footerText}>Quotation Ref: {quotationRef}</Text>
         </View>
-
       </Page>
     </Document>
   );
