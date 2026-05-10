@@ -1,9 +1,11 @@
-import InvoiceForm from './components/InvoiceForm';
+import InvoiceForm from "./components/InvoiceForm";
+import InvoiceDocument from "./components/InvoiceDocument";
 
 function App() {
   return (
     <>
-    <InvoiceForm/>
+      {/* <InvoiceForm/> */}
+      <InvoiceDocument />
     </>
   );
 }
