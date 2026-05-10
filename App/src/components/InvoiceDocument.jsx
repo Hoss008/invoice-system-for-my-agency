@@ -345,7 +345,7 @@ function InvoiceDocument({ clientName, companyName, date, price, inv, quo }) {
               [ FIRST MILESTONE PAYMENT ] — {companyName || clientName} |
               Website Portfolio.{"\n"}
               50% upfront payment based on the approved quotation [
-              {quotationRef}].{"\n"}
+              {quotationRef}]
               Payment preferably to be paid in full no later than 7 days after
               receiving this invoice. For International Payments, please ensure
               bank/transfer fees are covered from your side.

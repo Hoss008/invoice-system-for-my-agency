@@ -36,11 +36,8 @@ function InvoiceForm() {
     <div className="min-h-screen bg-white text-black flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-md border border-black p-6">
         <h1 className="text-xl font-semibold tracking-tight">
-          Invoice Generator
+          NORQUE STUDIO INVOICE GENERATOR
         </h1>
-        <p className="text-xs uppercase tracking-widest text-black/60 mt-2">
-          Minimal form
-        </p>
 
         <form action={formAction} className="mt-6 grid gap-4">
           <input
@@ -87,7 +84,7 @@ function InvoiceForm() {
         </form>
 
         {state?.message && (
-          <p className="mt-4 border border-black px-3 py-2 text-xs uppercase tracking-widest">
+          <p className="mt-4 border border-red-500 bg-red-50 px-3 py-2 text-xs uppercase tracking-widest text-red-700">
             {state.message}
           </p>
         )}
