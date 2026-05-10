@@ -7,18 +7,6 @@ import {
   Font,
 } from "@react-pdf/renderer";
 
-// Register your font — replace with your actual font file path
-// Uncomment and add font files to public/fonts/ when ready
-/*
-Font.register({
-  family: "Inter",
-  fonts: [
-    { src: "/fonts/Inter-Regular.ttf", fontWeight: 400 },
-    { src: "/fonts/Inter-Medium.ttf", fontWeight: 500 },
-    { src: "/fonts/Inter-Bold.ttf", fontWeight: 700 },
-  ],
-});
-*/
 
 const EGP_RATE = 52;
 
@@ -247,8 +235,8 @@ function formatDate(dateStr) {
 function InvoiceDocument({ clientName, companyName, date, price, inv, quo }) {
   const usd = parseFloat(price);
   const egp = (usd * EGP_RATE).toLocaleString();
-  const invoiceNumber = `INV-${inv}-EG-26`;
-  const quotationRef = `QT-${quo}-EG-26`;
+  const invoiceNumber = `INV-00${inv}-EG-26`;
+  const quotationRef = `QT-00${quo}-EG-26`;
 
   return (
     <Document>
@@ -372,7 +360,7 @@ function InvoiceDocument({ clientName, companyName, date, price, inv, quo }) {
         {/* ── Section 5 — Footer ── */}
         <View style={styles.footer}>
           <Text style={styles.footerText}>NORQUE STUDIOS™</Text>
-          <Text style={styles.footerText}>Quotation Ref: {quotationRef}</Text>
+          <Text style={styles.footerText}>QUOTAION REF: {quotationRef}</Text>
         </View>
       </Page>
     </Document>
