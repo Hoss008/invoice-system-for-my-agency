@@ -4,10 +4,10 @@ import { useActionState } from "react";
 async function actionFunction(previousState, formData) {
   const clientName = formData.get("clientName");
   const companyName = formData.get("companyName");
-  const date = formData.get("date");
   const price = formData.get("price");
+  const date = new Date().toISOString().split("T")[0]; // Today's date
 
-  if (!clientName || !date || !price) {
+  if (!clientName || !price) {
     return {
       success: false,
       message: "Enter all fields",
@@ -32,8 +32,6 @@ function InvoiceForm() {
         <input type="text" placeholder="Client Name" name="clientName" />
 
         <input type="text" placeholder="Company Name" name="companyName" />
-
-        <input type="date" placeholder="Date" name="date" />
 
         <input type="number" placeholder="Price" name="price" />
 
