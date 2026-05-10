@@ -3,6 +3,7 @@ import { useActionState } from "react";
 
 async function actionFunction(previousState, formData) {
   const clientName = formData.get("clientName");
+  const companyName = formData.get("companyName");
   const date = formData.get("date");
   const price = formData.get("price");
 
@@ -16,6 +17,7 @@ async function actionFunction(previousState, formData) {
   return {
     success: true,
     clientName,
+    companyName,
     date,
     price,
   };
@@ -29,7 +31,9 @@ function InvoiceForm() {
       <form action={formAction}>
         <input type="text" placeholder="Client Name" name="clientName" />
 
-        <input type="text" placeholder="Date" name="date" />
+        <input type="text" placeholder="Company Name" name="companyName" />
+
+        <input type="date" placeholder="Date" name="date" />
 
         <input type="number" placeholder="Price" name="price" />
 
@@ -41,8 +45,9 @@ function InvoiceForm() {
       {state?.success && (
         <>
           <p>{state.clientName}</p>
+          <p>{state.companyName}</p>
           <p>{state.date}</p>
-          <p>{state.price}</p>
+          <p>${state.price}</p>
         </>
       )}
     </>
