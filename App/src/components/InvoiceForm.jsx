@@ -14,6 +14,7 @@ async function actionFunction(previousState, formData) {
   }
 
   return {
+    success: true,
     clientName,
     date,
     price,
@@ -35,7 +36,9 @@ function InvoiceForm() {
         <button type="submit">Submit Form</button>
       </form>
 
-      {state && (
+      {state?.message && <p>{state.message}</p>}
+
+      {state?.success && (
         <>
           <p>{state.clientName}</p>
           <p>{state.date}</p>
