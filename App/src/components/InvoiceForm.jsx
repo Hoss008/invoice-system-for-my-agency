@@ -45,8 +45,20 @@ function InvoiceForm() {
       {state?.success && (
         <>
           <p>{state.clientName}</p>
-          <p>{state.companyName}</p>
-          <p>{state.date}</p>
+          {state?.companyName && <p>{state.companyName}</p>}
+          {state?.date && (
+            <p>
+              {(() => {
+                const date = new Date(state.date);
+                const day = String(date.getDate()).padStart(2, "0");
+                const month = date
+                  .toLocaleString("en-US", { month: "short" })
+                  .toUpperCase();
+                const year = date.getFullYear();
+                return `[ ${day} ${month} ${year} ]`;
+              })()}
+            </p>
+          )}
           <p>${state.price}</p>
         </>
       )}
