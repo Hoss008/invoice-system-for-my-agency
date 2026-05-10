@@ -41,7 +41,10 @@ function InvoiceForm() {
 
         <input type="number" placeholder="Price" name="price" />
 
-        <button type="submit">Submit Form</button>
+        <input type="number" placeholder="Quotaion Ref" name="quo" />
+
+
+        <button type="submit">Submit </button>
       </form>
 
       {state?.message && <p>{state.message}</p>}
@@ -65,6 +68,7 @@ function InvoiceForm() {
           )}
           <p>${state.price}</p>
           <p>{`INV-00${state.inv}-EG-26`}</p>
+          <p>{`QUOTATION REF: QT-00${state.quo}-EG-26`}</p>
         </>
       )}
     </>
