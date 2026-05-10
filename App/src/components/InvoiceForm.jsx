@@ -5,9 +5,11 @@ async function actionFunction(previousState, formData) {
   const clientName = formData.get("clientName");
   const companyName = formData.get("companyName");
   const price = formData.get("price");
+  const inv = formData.get("inv");
+  const quo = formData.get("quo");
   const date = new Date().toISOString().split("T")[0]; // Today's date
 
-  if (!clientName || !price) {
+  if (!clientName || !price || !inv || !quo) {
     return {
       success: false,
       message: "Enter all fields",
@@ -20,6 +22,8 @@ async function actionFunction(previousState, formData) {
     companyName,
     date,
     price,
+    inv,
+    quo,
   };
 }
 
@@ -30,6 +34,8 @@ function InvoiceForm() {
     <>
       <form action={formAction}>
         <input type="text" placeholder="Client Name" name="clientName" />
+
+        <input type="number" placeholder="Invoice" name="inv" />
 
         <input type="text" placeholder="Company Name" name="companyName" />
 
@@ -58,6 +64,7 @@ function InvoiceForm() {
             </p>
           )}
           <p>${state.price}</p>
+          <p>{`INV-00${state.inv}-EG-26`}</p>
         </>
       )}
     </>
