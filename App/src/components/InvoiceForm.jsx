@@ -1,5 +1,5 @@
 //Form
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 
 async function actionFunction(previousState, formData) {
   const clientName = formData.get("clientName");
@@ -29,6 +29,11 @@ async function actionFunction(previousState, formData) {
 
 function InvoiceForm() {
   const [state, formAction] = useActionState(actionFunction, null);
+  const [inputValue, setInputValue] = useState();
+
+  const handleChange = (e) => {
+    setInputValue(e.target.value) 
+  };
 
   return (
     <>
@@ -39,10 +44,15 @@ function InvoiceForm() {
 
         <input type="text" placeholder="Company Name" name="companyName" />
 
-        <input type="number" placeholder="Price" name="price" />
+        <input
+          type="number"
+          placeholder="Price"
+          name="price"
+          onChange={handleChange}
+          value={inputValue}  
+        />
 
         <input type="number" placeholder="Quotaion Ref" name="quo" />
-
 
         <button type="submit">Submit </button>
       </form>
@@ -66,7 +76,7 @@ function InvoiceForm() {
               })()}
             </p>
           )}
-          <p>${state.price}</p>
+          <p>{inputValue*52}</p>
           <p>{`INV-00${state.inv}-EG-26`}</p>
           <p>{`QUOTATION REF: QT-00${state.quo}-EG-26`}</p>
         </>
