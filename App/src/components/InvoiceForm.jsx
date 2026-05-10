@@ -1,14 +1,13 @@
-//Form
 import { useActionState } from "react";
 
 async function actionFunction(previousState, formData) {
   const clientName = formData.get("clientName");
   const companyName = formData.get("companyName");
-  const price = formData.get("price");
+  const price = Number(formData.get("price"));
   const inv = formData.get("inv");
   const quo = formData.get("quo");
   const now = new Date();
-  const date = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`; //cairo time not UTC
+  const date = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`; //cairo not UTC
 
   if (!clientName || !price || !inv || !quo) {
     return {
@@ -40,15 +39,11 @@ function InvoiceForm() {
 
         <input type="text" placeholder="Company Name" name="companyName" />
 
-        <input
-          type="number"
-          placeholder="Price in $"
-          name="price"
-        />
+        <input type="number" placeholder="Price in $" name="price" />
 
-        <input type="number" placeholder="Quotaion Ref" name="quo" />
+        <input type="number" placeholder="Quotation Ref" name="quo" />
 
-        <button type="submit">Gnerate Invoice </button>
+        <button type="submit">Generate Invoice</button>
       </form>
 
       {state?.message && <p>{state.message}</p>}
@@ -60,17 +55,16 @@ function InvoiceForm() {
           {state?.date && (
             <p>
               {(() => {
-                const date = new Date(state.date);
-                const day = String(date.getDate()).padStart(2, "0");
-                const month = date
-                  .toLocaleString("en-US", { month: "short" })
-                  .toUpperCase();
-                const year = date.getFullYear();
-                return `[ ${day} ${month} ${year} ]`;
+                const [year, month, day] = state.date.split("-");
+                const monthNames = [
+                  "JAN", "FEB", "MAR", "APR", "MAY", "JUN",
+                  "JUL", "AUG", "SEP", "OCT", "NOV", "DEC",
+                ];
+                return `[ ${day} ${monthNames[parseInt(month) - 1]} ${year} ]`;
               })()}
             </p>
           )}
-          <p>Total In EGP {(parseFloat(state.price) * 52).toLocaleString()}</p>
+          <p>Total In EGP {(state.price * 52).toLocaleString()}</p>
           <p>{`INV-00${state.inv}-EG-26`}</p>
           <p>{`QUOTATION REF: QT-00${state.quo}-EG-26`}</p>
           <button>Download Invoice.</button>
