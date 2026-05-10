@@ -1,4 +1,6 @@
 import { useActionState } from "react";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import InvoiceDocument from "./InvoiceDocument";
 
 async function actionFunction(previousState, formData) {
   const clientName = formData.get("clientName");
@@ -49,26 +51,21 @@ function InvoiceForm() {
       {state?.message && <p>{state.message}</p>}
 
       {state?.success && (
-        <>
-          <p>{state.clientName}</p>
-          {state?.companyName && <p>{state.companyName}</p>}
-          {state?.date && (
-            <p>
-              {(() => {
-                const [year, month, day] = state.date.split("-");
-                const monthNames = [
-                  "JAN", "FEB", "MAR", "APR", "MAY", "JUN",
-                  "JUL", "AUG", "SEP", "OCT", "NOV", "DEC",
-                ];
-                return `[ ${day} ${monthNames[parseInt(month) - 1]} ${year} ]`;
-              })()}
-            </p>
-          )}
-          <p>Total In EGP {(state.price * 52).toLocaleString()}</p>
-          <p>{`INV-00${state.inv}-EG-26`}</p>
-          <p>{`QUOTATION REF: QT-00${state.quo}-EG-26`}</p>
-          <button>Download Invoice.</button>
-        </>
+        <PDFDownloadLink
+          document={
+            <InvoiceDocument
+              clientName={state.clientName}
+              companyName={state.companyName}
+              date={state.date}
+              price={state.price}
+              inv={state.inv}
+              quo={state.quo}
+            />
+          }
+          fileName={`INV-${state.inv}-EG-26.pdf`}
+        >
+          Download Invoice
+        </PDFDownloadLink>
       )}
     </>
   );
